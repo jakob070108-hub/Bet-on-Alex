@@ -1,0 +1,489 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2775.1">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="de"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Bet on Alex&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>body { background-color: #0f172a; color: #f8fafc; font-family: sans-serif; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.hidden { display: none !important; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body class="min-h-screen flex flex-col items-center p-4"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Header / Navigation --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="header" class="w-full max-w-4xl flex justify-between items-center bg-slate-800 p-4 rounded-xl shadow-xl mb-6 hidden border border-slate-700"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h1 class="text-xl font-extrabold text-amber-400 tracking-wider"&gt;🎲 Bet on Alex&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="flex items-center gap-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;span id="user-info" class="text-sm font-semibold text-slate-300"&gt;&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button onclick="logout()" class="bg-rose-600 hover:bg-rose-500 px-3 py-1.5 rounded-lg text-sm font-bold transition shadow"&gt;Logout&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- 1. LOGIN SCREEN --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="login-view" class="w-full max-w-md bg-slate-800 p-8 rounded-2xl shadow-2xl mt-16 border border-slate-700"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h2 class="text-3xl font-extrabold text-center mb-2 text-amber-400"&gt;Bet on Alex&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;p class="text-xs text-slate-400 mb-6 text-center"&gt;Tipp: Nenne dich "admin", um das Admin-Panel zu steuern.&lt;/p&gt;</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="mb-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1"&gt;Benutzername&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;input type="text" id="login-username" class="w-full p-3 rounded-lg bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-amber-400 transition"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="mb-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1"&gt;Passwort&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;input type="password" id="login-password" class="w-full p-3 rounded-lg bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-amber-400 transition"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button onclick="login()" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 py-3 rounded-lg font-extrabold transition shadow-lg"&gt;Einloggen / Registrieren&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;p id="login-error" class="text-rose-400 text-sm mt-3 text-center hidden font-medium"&gt;&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- 2. PENDING VIEW (Warten auf Verifizierung) --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="pending-view" class="w-full max-w-md bg-slate-800 p-8 rounded-2xl shadow-2xl mt-20 hidden text-center border border-slate-700"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="text-amber-400 text-5xl mb-4"&gt;⏳&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h2 class="text-2xl font-bold mb-3 text-amber-400"&gt;Konto wartet auf Freigabe&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;p class="text-sm text-slate-300 mb-4 leading-relaxed"&gt;Dein Account wurde erstellt. Ein Administrator muss dein Konto prüfen und dir dein Startguthaben zuweisen.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button onclick="updateUI()" class="bg-slate-700 hover:bg-slate-600 text-xs px-4 py-2 rounded-lg font-bold transition"&gt;Status aktualisieren&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- 3. ADMIN VIEW --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="admin-view" class="w-full max-w-4xl hidden space-y-6"&gt;</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- System Backup / Sync --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="bg-slate-800 p-6 rounded-2xl shadow-xl border border-slate-700 flex flex-wrap justify-between items-center gap-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h3 class="font-bold text-lg text-amber-400"&gt;System-Daten&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p class="text-xs text-slate-400"&gt;Sichere oder lade den aktuellen Status der Wetten &amp; Nutzer.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="flex gap-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;button onclick="exportData()" class="bg-slate-700 hover:bg-slate-600 px-4 py-2 rounded-lg text-sm font-bold transition"&gt;Daten sichern (Export)&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;label class="bg-slate-700 hover:bg-slate-600 px-4 py-2 rounded-lg text-sm font-bold transition cursor-pointer"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>Daten laden (Import) &lt;input type="file" onchange="importData(event)" class="hidden" accept=".json"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Pending Users --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="bg-slate-800 p-6 rounded-2xl shadow-xl border border-slate-700"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h3 class="text-xl font-bold mb-4 border-b border-slate-700 pb-2 text-amber-400"&gt;Neue Nutzer verifizieren&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="admin-pending-users" class="space-y-3"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Create Bet --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="bg-slate-800 p-6 rounded-2xl shadow-xl border border-slate-700"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h3 class="text-xl font-bold mb-4 border-b border-slate-700 pb-2 text-amber-400"&gt;Individuelle Wette erstellen&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="mb-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1"&gt;Wett-Thema / Ereignis&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;input type="text" id="new-bet-title" placeholder="z.B. Wer schießt das nächste Tor?" class="w-full p-3 rounded-lg bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-amber-400"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2"&gt;Auswahlmöglichkeiten &amp; Quoten&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="bet-options-container" class="space-y-2 mb-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="flex gap-2 bet-option-row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="text" placeholder="Option (z.B. Team A)" class="w-2/3 p-2.5 rounded-lg bg-slate-900 border border-slate-700 text-white focus:outline-none"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="number" step="0.01" placeholder="Quote (z.B. 1.85)" class="w-1/3 p-2.5 rounded-lg bg-slate-900 border border-slate-700 text-white focus:outline-none"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="flex gap-2 bet-option-row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="text" placeholder="Option (z.B. Team B)" class="w-2/3 p-2.5 rounded-lg bg-slate-900 border border-slate-700 text-white focus:outline-none"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="number" step="0.01" placeholder="Quote (z.B. 2.10)" class="w-1/3 p-2.5 rounded-lg bg-slate-900 border border-slate-700 text-white focus:outline-none"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="flex justify-between items-center mt-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;button onclick="addOptionRow()" class="text-amber-400 hover:text-amber-300 text-sm font-bold"&gt;+ Option hinzufügen&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;button onclick="createBet()" class="bg-emerald-600 hover:bg-emerald-500 px-6 py-2.5 rounded-lg font-extrabold transition shadow"&gt;Wette veröffentlichen&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Active Bets (Auswerten) --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="bg-slate-800 p-6 rounded-2xl shadow-xl border border-slate-700"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h3 class="text-xl font-bold mb-4 border-b border-slate-700 pb-2 text-amber-400"&gt;Offene Wetten auswerten&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="admin-active-bets" class="space-y-4"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- 4. USER VIEW (Wetten platzieren) --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="user-view" class="w-full max-w-4xl hidden space-y-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="bg-slate-800 p-6 rounded-2xl shadow-xl border border-slate-700"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h3 class="text-xl font-bold mb-4 border-b border-slate-700 pb-2 text-amber-400"&gt;Aktuelle Wetten&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="user-active-bets" class="space-y-6"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="bg-slate-800 p-6 rounded-2xl shadow-xl border border-slate-700"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h3 class="text-xl font-bold mb-4 border-b border-slate-700 pb-2 text-amber-400"&gt;Meine abgegebenen Tipps&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="user-history" class="space-y-3"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Lokale Datenbank initialisieren</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if(!localStorage.getItem('boa_users')) localStorage.setItem('boa_users', JSON.stringify({}));</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if(!localStorage.getItem('boa_bets')) localStorage.setItem('boa_bets', JSON.stringify([]));</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if(!localStorage.getItem('boa_placements')) localStorage.setItem('boa_placements', JSON.stringify([]));</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>let currentUser = null;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function loadData(key) { return JSON.parse(localStorage.getItem(key)); }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function saveData(key, data) { localStorage.setItem(key, JSON.stringify(data)); }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function hash(str) { return btoa(encodeURIComponent(str)); }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function login() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const user = document.getElementById('login-username').value.trim();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const pass = document.getElementById('login-password').value.trim();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const errorEl = document.getElementById('login-error');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if(!user || !pass) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>errorEl.innerText = "Bitte Benutzername und Passwort eingeben!";</p>
+<p class="p1"><span class="Apple-converted-space">                </span>errorEl.classList.remove('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>let users = loadData('boa_users');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if(!users[user]) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>users[user] = {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>password: hash(pass),</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>role: user.toLowerCase() === 'admin' ? 'admin' : 'user',</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>status: user.toLowerCase() === 'admin' ? 'verified' : 'pending',</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>balance: 0</p>
+<p class="p1"><span class="Apple-converted-space">                </span>};</p>
+<p class="p1"><span class="Apple-converted-space">                </span>saveData('boa_users', users);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if(users[user].password !== hash(pass)) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>errorEl.innerText = "Falsches Passwort!";</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>errorEl.classList.remove('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>errorEl.classList.add('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>currentUser = user;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>updateUI();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function logout() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>currentUser = null;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('login-username').value = '';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('login-password').value = '';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>updateUI();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function updateUI() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('login-view').classList.add('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('pending-view').classList.add('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('admin-view').classList.add('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('user-view').classList.add('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('header').classList.add('hidden');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if(!currentUser) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('login-view').classList.remove('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const users = loadData('boa_users');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const userData = users[currentUser];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('header').classList.remove('hidden');</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if(userData.role === 'admin') {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('user-info').innerText = `Admin-Modus`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('admin-view').classList.remove('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>renderAdminView();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else if (userData.status === 'pending') {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('user-info').innerText = `Eingeloggt als ${currentUser}`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('pending-view').classList.remove('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('user-info').innerText = `${currentUser} | Guthaben: ${userData.balance.toFixed(2)} Coins`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('user-view').classList.remove('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>renderUserView();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function renderAdminView() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const users = loadData('boa_users');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const pendingContainer = document.getElementById('admin-pending-users');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>pendingContainer.innerHTML = '';</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>let hasPending = false;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>for(let username in users) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if(users[username].status === 'pending') {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>hasPending = true;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>pendingContainer.innerHTML += `</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex flex-wrap items-center justify-between bg-slate-900 p-3 rounded-xl border border-slate-700 gap-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="font-bold text-white"&gt;${username}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="flex gap-2 items-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;input type="number" id="start-${username}" placeholder="Startguthaben" class="w-32 p-2 rounded-lg bg-slate-800 text-white border border-slate-700 text-sm"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;button onclick="verifyUser('${username}')" class="bg-emerald-600 hover:bg-emerald-500 px-4 py-2 rounded-lg font-bold text-sm transition"&gt;Verifizieren&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if(!hasPending) pendingContainer.innerHTML = '&lt;p class="text-sm text-slate-400"&gt;Keine neuen Nutzer warten auf Freigabe.&lt;/p&gt;';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const bets = loadData('boa_bets');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const activeBetsContainer = document.getElementById('admin-active-bets');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>activeBetsContainer.innerHTML = '';</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>let hasOpenBets = false;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>bets.forEach((bet, betId) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if(bet.status === 'open') {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>hasOpenBets = true;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>let optionsHtml = '&lt;select id="winner-'+betId+'" class="p-2.5 rounded-lg bg-slate-900 text-white border border-slate-700 mr-2 text-sm flex-grow"&gt;&lt;option value=""&gt;Wähle das Gewinner-Ergebnis...&lt;/option&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>bet.options.forEach((opt, idx) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>optionsHtml += `&lt;option value="${idx}"&gt;${opt.text} (Quote: ${opt.odds})&lt;/option&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>});</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>optionsHtml += '&lt;/select&gt;';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>activeBetsContainer.innerHTML += `</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="bg-slate-900 p-4 rounded-xl border border-slate-700"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h4 class="font-bold text-base mb-3 text-slate-100"&gt;${bet.title}&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="flex flex-wrap items-center gap-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>${optionsHtml}</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;button onclick="resolveBet(${betId})" class="bg-rose-600 hover:bg-rose-500 px-4 py-2.5 rounded-lg font-bold text-sm transition shadow"&gt;Auswerten &amp; Auszahlen&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if(!hasOpenBets) activeBetsContainer.innerHTML = '&lt;p class="text-sm text-slate-400"&gt;Keine offenen Wetten vorhanden.&lt;/p&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function verifyUser(username) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let users = loadData('boa_users');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let balance = parseFloat(document.getElementById(`start-${username}`).value);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if(isNaN(balance) || balance &lt; 0) return alert("Bitte ein gültiges Startguthaben eingeben.");</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>users[username].status = 'verified';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>users[username].balance = balance;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>saveData('boa_users', users);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>renderAdminView();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function addOptionRow() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const container = document.getElementById('bet-options-container');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const row = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>row.className = "flex gap-2 bet-option-row mt-2";</p>
+<p class="p1"><span class="Apple-converted-space">            </span>row.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;input type="text" placeholder="Option" class="w-2/3 p-2.5 rounded-lg bg-slate-900 border border-slate-700 text-white focus:outline-none"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;input type="number" step="0.01" placeholder="Quote" class="w-1/3 p-2.5 rounded-lg bg-slate-900 border border-slate-700 text-white focus:outline-none"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>container.appendChild(row);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function createBet() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const title = document.getElementById('new-bet-title').value.trim();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if(!title) return alert("Bitte ein Wett-Ereignis eintragen.");</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const rows = document.querySelectorAll('.bet-option-row');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let options = [];</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>rows.forEach(row =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const text = row.children[0].value.trim();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const odds = parseFloat(row.children[1].value);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if(text &amp;&amp; !isNaN(odds) &amp;&amp; odds &gt; 1) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>options.push({ text: text, odds: odds });</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if(options.length &lt; 2) return alert("Eine Wette benötigt mindestens 2 gültige Optionen mit Quoten über 1.0.");</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>let bets = loadData('boa_bets');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>bets.push({</p>
+<p class="p1"><span class="Apple-converted-space">                </span>title: title,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>options: options,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>status: 'open',</p>
+<p class="p1"><span class="Apple-converted-space">                </span>winnerId: null</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">            </span>saveData('boa_bets', bets);</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('new-bet-title').value = '';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('bet-options-container').innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="flex gap-2 bet-option-row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="text" placeholder="Option" class="w-2/3 p-2.5 rounded-lg bg-slate-900 border border-slate-700 text-white focus:outline-none"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="number" step="0.01" placeholder="Quote" class="w-1/3 p-2.5 rounded-lg bg-slate-900 border border-slate-700 text-white focus:outline-none"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="flex gap-2 bet-option-row mt-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="text" placeholder="Option" class="w-2/3 p-2.5 rounded-lg bg-slate-900 border border-slate-700 text-white focus:outline-none"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="number" step="0.01" placeholder="Quote" class="w-1/3 p-2.5 rounded-lg bg-slate-900 border border-slate-700 text-white focus:outline-none"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>renderAdminView();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>alert("Wette erfolgreich erstellt!");</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function resolveBet(betId) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const selectEl = document.getElementById(`winner-${betId}`);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if(selectEl.value === "") return alert("Bitte wähle ein Gewinner-Ergebnis aus.");</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const winnerIdx = parseInt(selectEl.value);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>let bets = loadData('boa_bets');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let users = loadData('boa_users');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let placements = loadData('boa_placements');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>bets[betId].status = 'closed';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>bets[betId].winnerId = winnerIdx;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const winningOdds = bets[betId].options[winnerIdx].odds;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>placements.forEach(p =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if(p.betId === betId &amp;&amp; p.status === 'pending') {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if(p.optionIdx === winnerIdx) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>p.status = 'won';</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>users[p.username].balance += p.amount * winningOdds;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>p.status = 'lost';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>saveData('boa_bets', bets);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>saveData('boa_users', users);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>saveData('boa_placements', placements);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>renderAdminView();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>alert("Wette erfolgreich ausgewertet!");</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function renderUserView() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const bets = loadData('boa_bets');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const placements = loadData('boa_placements');</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const activeBetsContainer = document.getElementById('user-active-bets');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const historyContainer = document.getElementById('user-history');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>activeBetsContainer.innerHTML = '';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>historyContainer.innerHTML = '';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>let hasOpenBets = false;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>bets.forEach((bet, betId) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if(bet.status === 'open') {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>hasOpenBets = true;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>let optionsHtml = '';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>bet.options.forEach((opt, idx) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>optionsHtml += `</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="flex justify-between items-center bg-slate-900 p-3 rounded-xl border border-slate-700 mt-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;span class="font-medium text-slate-200"&gt;${opt.text} &lt;span class="text-amber-400 font-extrabold ml-2"&gt;x${opt.odds}&lt;/span&gt;&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div class="flex gap-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;input type="number" id="bet-amt-${betId}-${idx}" placeholder="Einsatz" class="w-24 p-1.5 rounded-lg bg-slate-800 text-white border border-slate-700 text-sm focus:outline-none"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;button onclick="placeBet(${betId}, ${idx})" class="bg-amber-500 hover:bg-amber-400 text-slate-950 px-3 py-1.5 rounded-lg font-bold text-sm transition shadow"&gt;Wetten&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>activeBetsContainer.innerHTML += `</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="bg-slate-900/50 p-4 rounded-xl border border-slate-700"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h4 class="font-bold text-lg mb-2 text-slate-100"&gt;${bet.title}&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>${optionsHtml}</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if(!hasOpenBets) activeBetsContainer.innerHTML = '&lt;p class="text-sm text-slate-400"&gt;Derzeit sind keine Wetten verfügbar.&lt;/p&gt;';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const myPlacements = placements.filter(p =&gt; p.username === currentUser).reverse();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if(myPlacements.length === 0) historyContainer.innerHTML = '&lt;p class="text-sm text-slate-400"&gt;Du hast noch keine Wetten platziert.&lt;/p&gt;';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>myPlacements.forEach(p =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const bet = bets[p.betId];</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (!bet) return;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const option = bet.options[p.optionIdx];</p>
+<p class="p1"><span class="Apple-converted-space">                </span>let statusBadge = '&lt;span class="text-amber-400 font-semibold"&gt;Offen&lt;/span&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if(p.status === 'won') statusBadge = `&lt;span class="text-emerald-400 font-bold"&gt;Gewonnen (+${(p.amount * option.odds).toFixed(2)})&lt;/span&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if(p.status === 'lost') statusBadge = '&lt;span class="text-rose-400 font-semibold"&gt;Verloren&lt;/span&gt;';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>historyContainer.innerHTML += `</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="flex justify-between items-center bg-slate-900 p-3 rounded-xl border border-slate-700 text-sm"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="font-bold text-slate-200"&gt;${bet.title}&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="text-slate-400 text-xs mt-0.5"&gt;Tipp: ${option.text} (Quote: ${option.odds})&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="text-right"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="text-slate-300 font-medium"&gt;${p.amount} Coins&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="mt-0.5"&gt;${statusBadge}&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function placeBet(betId, optionIdx) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const amountInput = document.getElementById(`bet-amt-${betId}-${optionIdx}`);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const amount = parseFloat(amountInput.value);</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if(isNaN(amount) || amount &lt;= 0) return alert("Bitte einen gültigen Einsatz eingeben.");</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>let users = loadData('boa_users');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if(users[currentUser].balance &lt; amount) return alert("Nicht genügend Guthaben auf dem Konto!");</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>users[currentUser].balance -= amount;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>let placements = loadData('boa_placements');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>placements.push({</p>
+<p class="p1"><span class="Apple-converted-space">                </span>username: currentUser,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>betId: betId,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>optionIdx: optionIdx,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>amount: amount,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>status: 'pending'</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>saveData('boa_users', users);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>saveData('boa_placements', placements);</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>alert("Wette erfolgreich platziert!");</p>
+<p class="p1"><span class="Apple-converted-space">            </span>updateUI();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Backup Funktionen für Admin</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function exportData() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const data = {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>users: loadData('boa_users'),</p>
+<p class="p1"><span class="Apple-converted-space">                </span>bets: loadData('boa_bets'),</p>
+<p class="p1"><span class="Apple-converted-space">                </span>placements: loadData('boa_placements')</p>
+<p class="p1"><span class="Apple-converted-space">            </span>};</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'json' });</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const url = URL.createObjectURL(blob);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const a = document.createElement('a');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>a.href = url;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>a.download = `bet-on-alex-backup-${new Date().toISOString().slice(0,10)}.json`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>a.click();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function importData(event) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const file = event.target.files[0];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if(!file) return;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const reader = new FileReader();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>reader.onload = function(e) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>try {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const data = JSON.parse(e.target.result);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if(data.users &amp;&amp; data.bets) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>saveData('boa_users', data.users);</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>saveData('boa_bets', data.bets);</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>saveData('boa_placements', data.placements || []);</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>alert("Daten erfolgreich importiert!");</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>updateUI();</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>alert("Ungültige Backup-Datei.");</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>} catch(err) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>alert("Fehler beim Lesen der Datei.");</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>};</p>
+<p class="p1"><span class="Apple-converted-space">            </span>reader.readAsText(file);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
